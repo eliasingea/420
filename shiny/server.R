@@ -1,7 +1,7 @@
 
 library(shiny)
 
-source("../bathtub.R")
+source("../sd/bathtub.R")
 
 shinyServer(function(input,output,session) {
 
