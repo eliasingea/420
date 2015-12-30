@@ -15,7 +15,7 @@ shinyServer(function(input,output,session) {
             sim.length=input$bathtubSimLength)
         plot.bathtub.water.level(sim.results)
     })
-    
+
     output$faucetOnOffWidget <- renderUI({
         sliderInput("faucetOnOff", "Turn on/off faucet time (min)",
             min=0, max=input$bathtubSimLength, step=.1, value=c(1,4))
