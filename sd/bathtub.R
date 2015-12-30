@@ -47,5 +47,5 @@ bathtub.sim <- function(init.water.level.gal=50, turn.on.faucet.time=10,
 # Given the results of bathtub.sim(), plot the water level over time.
 plot.bathtub.water.level <- function(sim.results) {
     plot(sim.results$time, sim.results$water.level, xlab="time (sec)",
-        ylab="gallons", type="l", ylim=c(0,max(sim.results$water.level)))
+        ylab="gallons", type="l", ylim=c(0,max(80,sim.results$water.level)))
 }
