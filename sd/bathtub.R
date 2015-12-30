@@ -10,13 +10,14 @@
 #   (sec)
 # turn.off.faucet.time -- faucet turns back off at this point (sec)
 # pull.plug.time -- drain begins closed, then is unplugged at this point (sec)
+# sim.length (min)
 #
-bathtub.sim <- function(init.water.level.gal=50, turn.off.faucet.time=10,
+bathtub.sim <- function(init.water.level.gal=50, turn.on.faucet.time=10,
     turn.off.faucet.time=120, pull.plug.time=40, inflow.rate=15/60,
-    outflow.rate=20/60) {
+    outflow.rate=20/60, sim.length=5) {
 
     delta.t <- 1   # sec
-    time <- seq(0,5*60,delta.t)   # sec
+    time <- seq(0,sim.length*60,delta.t)   # sec
 
     water.level <- vector(length=length(time))   # gallons
 
