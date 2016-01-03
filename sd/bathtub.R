@@ -1,8 +1,8 @@
 
-# Meadows ch. 1 -- bathtub model
+# Meadows ch. 1 -- bathtub model (Fig. 5)
 
-# Given an initial level of water in a bathtub, return a data frame of water
-# levels over time. 
+# Given an initial level of water in a bathtub, and parameters indicating how
+# it is used, return a data frame of water levels over time. 
 #
 # inflow.rate from the faucet, when on (gallons/sec)
 # outflow.rate down the drain, when unplugged (gallons/sec)
