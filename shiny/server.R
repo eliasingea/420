@@ -2,6 +2,7 @@
 library(shiny)
 
 source("../sd/bathtub.R")
+source("../sd/caffeine.R")
 
 shinyServer(function(input,output,session) {
 
@@ -25,4 +26,16 @@ shinyServer(function(input,output,session) {
         sliderInput("pullPlugTime", "Pull plug time (min)",
             min=0, max=input$bathtubSimLength, step=.1, value=2)
     })
+
+    output$caffeinePlot <- renderPlot({
+        sim.results <- caffeine.sim(init.stored.energy=input$initStoredEnergy,
+            init.available.energy=input$initAvailableEnergy,
+            low.expenditure.level=input$lowExpenditureLevel,
+            high.expenditure.level=input$highExpenditureLevel,
+            baseline.metabolization.rate=input$baselineMetabolizationRate,
+            desired.available.energy=input$desiredAvailableEnergy,
+            sim.length=input$caffeineSimLength)
+        plot.energy(sim.results)
+    })
+
 })
