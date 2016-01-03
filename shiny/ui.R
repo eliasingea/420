@@ -21,11 +21,16 @@ shinyUI(fluidPage(
                 uiOutput("faucetOnOffWidget"),
                 uiOutput("pullPlugTimeWidget"),
 
-                numericInput("inflowRate", "Faucet flow rate (gal/min)",
-                    value=15, min=0, step=1, width="45%"),
-                numericInput("outflowRate", "Drain rate (gal/min)",
-                    value=20, min=0, step=1, width="45%")
-                ),
+                div(class="container-fluid",
+                    div(class="row",
+                        div(class="col-lg-6", 
+                            numericInput("inflowRate", "Faucet rate (gal/min)",
+                                value=15, min=0, step=1)),
+                        div(class="col-lg-6", 
+                            numericInput("outflowRate", "Drain rate (gal/min)",
+                                value=20, min=0, step=1))
+                    )
+                )),
                 mainPanel(
                     plotOutput("bathtubWaterLevelPlot")
                 )

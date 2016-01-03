@@ -40,12 +40,27 @@ bathtub.sim <- function(init.water.level.gal=50, turn.on.faucet.time=10,
             max(water.level[step-1] + delta.water.level * delta.t, 0)
     }
 
-    return(data.frame(time=time,water.level=water.level))
+    return(list(
+        results=data.frame(time=time,water.level=water.level),
+        params=list(init.water.level.gal=init.water.level.gal,
+                    turn.on.faucet.time=turn.on.faucet.time,
+                    turn.off.faucet.time=turn.off.faucet.time,
+                    pull.plug.time=pull.plug.time,
+                    inflow.rate=inflow.rate,
+                    outflow.rate=outflow.rate,
+                    sim.length=sim.length)))
 }
 
 
 # Given the results of bathtub.sim(), plot the water level over time.
 plot.bathtub.water.level <- function(sim.results) {
-    plot(sim.results$time, sim.results$water.level, xlab="time (sec)",
-        ylab="gallons", type="l", ylim=c(0,max(80,sim.results$water.level)))
+    results <- sim.results$results
+    max.y <- max(80,results$water.level)
+    plot(results$time, results$water.level, xlab="time (sec)",
+        ylab="gallons", type="n", ylim=c(0,max.y))
+    rect(sim.results$params$turn.on.faucet.time,par("usr")[3],
+         sim.results$params$turn.off.faucet.time,par("usr")[4],
+         col="lightblue", border=NA)
+    lines(results$time, results$water.level, lwd=2, col="blue")
+    abline(v=sim.results$params$pull.plug.time,lty="dashed",col="red")
 }
