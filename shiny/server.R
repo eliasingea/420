@@ -3,8 +3,11 @@ library(shiny)
 
 source("../sd/bathtub.R")
 source("../sd/caffeine.R")
+source("../sd/coffee.R")
 
 shinyServer(function(input,output,session) {
+
+    ############# Bathtub ###################################################
 
     output$bathtubWaterLevelPlot <- renderPlot({
         sim.results <- bathtub.sim(init.water.level.gal=input$initWaterLevel,
@@ -27,6 +30,9 @@ shinyServer(function(input,output,session) {
             min=0, max=input$bathtubSimLength, step=.1, value=2)
     })
 
+
+    ############# Caffeine ###################################################
+
     output$caffeinePlot <- renderPlot({
         sim.results <- caffeine.sim(init.stored.energy=input$initStoredEnergy,
             init.available.energy=input$initAvailableEnergy,
@@ -38,4 +44,31 @@ shinyServer(function(input,output,session) {
         plot.energy(sim.results)
     })
 
+
+    ############# Coffee #####################################################
+    observeEvent(input$runCoffeeSim,
+    {
+        prev.coffee.results <<- NULL
+        output$coffeePlot <- renderPlot({
+            run.and.plot.coffee()
+        })
+    })
+
+    observeEvent(input$contCoffeeSim,
+    {
+        output$coffeePlot <- renderPlot({
+            run.and.plot.coffee()
+        })
+    })
+
+    run.and.plot.coffee <- function() {
+        isolate({
+            prev.coffee.results <<- 
+                coffee.sim(init.coffee.temp=input$initCoffeeTemp,
+                    room.temp=input$roomTemp,
+                    sim.length=input$coffeeSimLength,
+                    prev.results=prev.coffee.results)
+            plot.coffee(prev.coffee.results)
+        })
+    }
 })

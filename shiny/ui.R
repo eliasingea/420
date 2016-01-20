@@ -62,6 +62,28 @@ shinyUI(fluidPage(
                     plotOutput("caffeinePlot")
                 )
             )
+        ),
+        tabPanel("Coffee",
+            sidebarLayout(sidebarPanel(
+                numericInput("coffeeSimLength", "Simulation time (mins)",
+                    value=5*24, min=0, step=1, width="40%"),
+                div(class="container-fluid",
+                    div(class="row",
+                        div(class="col-lg-6", 
+                            actionButton("runCoffeeSim",label="Start/restart")),
+                        div(class="col-lg-6", 
+                            actionButton("contCoffeeSim",label="Continue"))
+                    )
+                ),
+                sliderInput("initCoffeeTemp", "Initial temp (°F)",
+                    min=20, max=220, step=1, value=192),
+                sliderInput("roomTemp", "Room temp (°F)",
+                    min=40, max=100, step=1, value=72)
+                ),
+                mainPanel(
+                    plotOutput("coffeePlot")
+                )
+            )
         )
     )
 
