@@ -56,9 +56,9 @@ caffeine.sim <- function(init.stored.energy=1e5, init.available.energy=1e4,
 
         # We lose energy, if we have any, equal to our metabolic rate.
         if (stored.energy[step-1] > 0) {
-            delta.stored.energy <- -metabolic.mobilization
+            stored.energy.prime <- -metabolic.mobilization
         } else {
-            delta.stored.energy <- 0
+            stored.energy.prime <- 0
         }
 
         if (time.now %% 24 > 8  &  time.now %% 24 < 17) {
@@ -67,12 +67,12 @@ caffeine.sim <- function(init.stored.energy=1e5, init.available.energy=1e4,
         } else {
             expenditure.level <- low.expenditure.level
         }
-        delta.available.energy <- -delta.stored.energy - expenditure.level
+        available.energy.prime <- -stored.energy.prime - expenditure.level
 
         stored.energy[step] <- 
-            max(stored.energy[step-1] + delta.stored.energy * delta.t, 0)
+            max(stored.energy[step-1] + stored.energy.prime * delta.t, 0)
         available.energy[step] <- 
-            max(available.energy[step-1] + delta.available.energy * delta.t, 0)
+            max(available.energy[step-1] + available.energy.prime * delta.t, 0)
     }
 
     return(data.frame(time=time,stored.energy=stored.energy,

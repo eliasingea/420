@@ -27,17 +27,17 @@ bathtub.sim <- function(init.water.level.gal=50, turn.on.faucet.time=10,
 
         time.now <- time[step]
 
-        delta.water.level <- 0    # gallons/sec
+        water.level.prime <- 0    # gallons/sec
         if (time.now > turn.on.faucet.time &&
             time.now < turn.off.faucet.time) {
-            delta.water.level <- delta.water.level + inflow.rate
+            water.level.prime <- water.level.prime + inflow.rate
         }
         if (time.now > pull.plug.time) {
-            delta.water.level <- delta.water.level - outflow.rate
+            water.level.prime <- water.level.prime - outflow.rate
         }
 
         water.level[step] <- 
-            max(water.level[step-1] + delta.water.level * delta.t, 0)
+            max(water.level[step-1] + water.level.prime * delta.t, 0)
     }
 
     return(list(
