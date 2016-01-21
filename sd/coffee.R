@@ -33,8 +33,6 @@ coffee.sim <- function(init.coffee.temp=192, room.temp=70, sim.length=2*60,
 
     for (step in 2:length(time)) {
 
-        time.now <- time[step]
-
         discrepancy <- coffee.temp[step-1] - room.temp
 
         temp.prime <- -(coffee.cooling.factor * discrepancy)
