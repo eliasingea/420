@@ -10,6 +10,9 @@ shinyServer(function(input,output,session) {
     ############# Bathtub ###################################################
 
     output$bathtubWaterLevelPlot <- renderPlot({
+        if (is.null(input$faucetOnOff)) {
+            return(NULL)
+        }
         sim.results <- bathtub.sim(init.water.level.gal=input$initWaterLevel,
             turn.on.faucet.time=input$faucetOnOff[1]*60,
             turn.off.faucet.time=input$faucetOnOff[2]*60,

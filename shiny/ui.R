@@ -57,11 +57,10 @@ shinyUI(fluidPage(
                 sliderInput("desiredAvailableEnergy", 
                     "Desired available energy (kcal)",
                     min=0, max=5e4, step=100, value=1.5e4)
-                ),
-                mainPanel(
-                    plotOutput("caffeinePlot")
-                )
-            )
+            ),
+            mainPanel(
+                plotOutput("caffeinePlot")
+            ))
         ),
         tabPanel("Coffee",
             sidebarLayout(sidebarPanel(
@@ -75,15 +74,20 @@ shinyUI(fluidPage(
                             actionButton("contCoffeeSim",label="Continue"))
                     )
                 ),
-                sliderInput("initCoffeeTemp", "Initial temp (°F)",
-                    min=20, max=220, step=1, value=192),
-                sliderInput("roomTemp", "Room temp (°F)",
-                    min=40, max=100, step=1, value=72)
+                div(
+                    h4("Initial conditions"),
+                    sliderInput("initCoffeeTemp", "Initial temp (°F)",
+                        min=20, max=220, step=1, value=192)
                 ),
-                mainPanel(
-                    plotOutput("coffeePlot")
+                div(
+                    h4("Sim parameters"),
+                    sliderInput("roomTemp", "Room temp (°F)",
+                        min=40, max=100, step=1, value=72)
                 )
-            )
+            ),
+            mainPanel(
+                plotOutput("coffeePlot")
+            ))
         )
     )
 
