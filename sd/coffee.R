@@ -46,10 +46,10 @@ coffee.sim <- function(init.coffee.temp=192, room.temp=70, sim.length=2*60,
 
 
 # Given the results of coffee.sim(), plot the room and coffee temp over time.
-plot.coffee <- function(sim.results) {
+plot.coffee <- function(sim.results, mug.desc="sucky 7-11 mug") {
     plot(sim.results$time, sim.results$coffee.temp, xlab="time (mins)",
         ylab=~degree~F, type="l", col="brown", lwd=2,
-        main="Mah coffee's getting col'",
+        main=paste("Temperature of coffee in",mug.desc),
         ylim=c(0,220))
     lines(sim.results$time, sim.results$room.temp, col="black", lwd=2)
     legend("topright",fill=c("brown","black"),legend=c("coffee","room"))
