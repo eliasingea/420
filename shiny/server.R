@@ -4,6 +4,7 @@ library(shiny)
 source("../sd/bathtub.R")
 source("../sd/caffeine.R")
 source("../sd/coffee.R")
+source("../sd/contiga.R")
 
 shinyServer(function(input,output,session) {
 
@@ -71,7 +72,34 @@ shinyServer(function(input,output,session) {
                     room.temp=input$roomTemp,
                     sim.length=input$coffeeSimLength,
                     prev.results=prev.coffee.results)
-            plot.coffee(prev.coffee.results)
+            plot.coffee(prev.coffee.results, "sucky 7-11 mug")
+        })
+    }
+
+
+    observeEvent(input$runContigaSim,
+    {
+        prev.contiga.results <<- NULL
+        output$contigaPlot <- renderPlot({
+            run.and.plot.contiga()
+        })
+    })
+
+    observeEvent(input$contContigaSim,
+    {
+        output$contigaPlot <- renderPlot({
+            run.and.plot.contiga()
+        })
+    })
+
+    run.and.plot.contiga <- function() {
+        isolate({
+            prev.contiga.results <<- 
+                contiga.sim(init.coffee.temp=input$initCoffeeTemp,
+                    room.temp=input$roomTemp,
+                    sim.length=input$coffeeSimLength,
+                    prev.results=prev.contiga.results)
+            plot.coffee(prev.contiga.results, "slick insulated Contiga mug")
         })
     }
 })

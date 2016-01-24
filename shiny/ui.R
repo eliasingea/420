@@ -88,6 +88,33 @@ shinyUI(fluidPage(
             mainPanel(
                 plotOutput("coffeePlot")
             ))
+        ),
+        tabPanel("Contiga",
+            sidebarLayout(sidebarPanel(
+                numericInput("contigaSimLength", "Simulation time (mins)",
+                    value=5*24, min=0, step=1, width="40%"),
+                div(class="container-fluid",
+                    div(class="row",
+                        div(class="col-lg-6", 
+                            actionButton("runContigaSim",label="Start/restart")),
+                        div(class="col-lg-6", 
+                            actionButton("contContigaSim",label="Continue"))
+                    )
+                ),
+                div(
+                    h4("Initial conditions"),
+                    sliderInput("initCoffeeTemp", "Initial temp (°F)",
+                        min=20, max=220, step=1, value=192)
+                ),
+                div(
+                    h4("Sim parameters"),
+                    sliderInput("roomTemp", "Room temp (°F)",
+                        min=40, max=100, step=1, value=72)
+                )
+            ),
+            mainPanel(
+                plotOutput("contigaPlot")
+            ))
         )
     )
 
