@@ -5,6 +5,7 @@ source("../sd/bathtub.R")
 source("../sd/caffeine.R")
 source("../sd/coffee.R")
 source("../sd/contiga.R")
+source("../sd/interest.R")
 
 shinyServer(function(input,output,session) {
 
@@ -102,4 +103,29 @@ shinyServer(function(input,output,session) {
             plot.coffee(prev.contiga.results, "slick insulated Contiga mug")
         })
     }
+
+
+    ############# Interest ##################################################
+
+    output$interestPlot <- renderPlot({
+        sim.results <- interest.sim(init.balance=input$initBalance,
+            annual.interest.rate=input$interestRate,
+            amortize.period=input$amortizationPeriod,
+            sim.length=input$caffeineSimLength)
+
+        amor.per <- as.numeric(input$amortizationPeriod)
+        if (isTRUE(all.equal(amor.per, 1/30))) {
+            plot.period.desc <- "daily"
+        } else if (isTRUE(all.equal(amor.per, 1))) {
+            plot.period.desc <- "monthly"
+        } else if (isTRUE(all.equal(amor.per, 12))) {
+            plot.period.desc <- "yearly"
+        } else {
+            plot.period.desc <- paste("every",
+                round(input$amortizationPeriod,1), "months")
+        }
+        plot.interest(sim.results, paste0(100 * input$interestRate, "%"),
+            plot.period.desc)
+    })
+
 })

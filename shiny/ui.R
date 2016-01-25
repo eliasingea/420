@@ -96,7 +96,8 @@ shinyUI(fluidPage(
                 div(class="container-fluid",
                     div(class="row",
                         div(class="col-lg-6", 
-                            actionButton("runContigaSim",label="Start/restart")),
+                            actionButton("runContigaSim",
+                                label="Start/restart")),
                         div(class="col-lg-6", 
                             actionButton("contContigaSim",label="Continue"))
                     )
@@ -114,6 +115,28 @@ shinyUI(fluidPage(
             ),
             mainPanel(
                 plotOutput("contigaPlot")
+            ))
+        ),
+        tabPanel("Interest",
+            sidebarLayout(sidebarPanel(
+                numericInput("interestSimLength", "Simulation time (months)",
+                    value=5*12, min=0, step=1, width="40%"),
+                div(
+                    h4("Initial conditions"),
+                    sliderInput("initBalance", "Initial balance ($)",
+                        min=0, max=10e4, step=100, value=1e4)
+                ),
+                div(
+                    h4("Sim parameters"),
+                    sliderInput("interestRate", "Annual interest rate",
+                        min=0, max=.4, step=.01, value=.01),
+                    sliderInput("amortizationPeriod",
+                        "Amortization period (months)",
+                        min=1/30, max=12, step=1/30, value=1)
+                )
+            ),
+            mainPanel(
+                plotOutput("interestPlot")
             ))
         )
     )
