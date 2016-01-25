@@ -109,7 +109,7 @@ shinyUI(fluidPage(
                 ),
                 div(
                     h4("Sim parameters"),
-                    sliderInput("roomTemp", "Room temp (°F)",
+                    sliderInput("contigaRoomTemp", "Room temp (°F)",
                         min=40, max=100, step=1, value=72)
                 )
             ),

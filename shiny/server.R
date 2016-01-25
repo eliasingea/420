@@ -97,7 +97,7 @@ shinyServer(function(input,output,session) {
         isolate({
             prev.contiga.results <<- 
                 contiga.sim(init.coffee.temp=input$initCoffeeTemp,
-                    room.temp=input$roomTemp,
+                    room.temp=input$contigaRoomTemp,
                     sim.length=input$coffeeSimLength,
                     prev.results=prev.contiga.results)
             plot.coffee(prev.contiga.results, "slick insulated Contiga mug")
