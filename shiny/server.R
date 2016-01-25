@@ -68,41 +68,22 @@ shinyServer(function(input,output,session) {
 
     run.and.plot.coffee <- function() {
         isolate({
+            if (input$mugType == "Contiga") {
+                sim.func <- contiga.sim
+                description <- "swanky Contiga mug"
+            } else {
+                sim.func <- coffee.sim
+                description <- "sucky 7-11 mug"
+            } 
             prev.coffee.results <<- 
-                coffee.sim(init.coffee.temp=input$initCoffeeTemp,
+                sim.func(init.coffee.temp=input$initCoffeeTemp,
                     room.temp=input$roomTemp,
                     sim.length=input$coffeeSimLength,
                     prev.results=prev.coffee.results)
-            plot.coffee(prev.coffee.results, "sucky 7-11 mug")
+            plot.coffee(prev.coffee.results, description)
         })
     }
 
-
-    observeEvent(input$runContigaSim,
-    {
-        prev.contiga.results <<- NULL
-        output$contigaPlot <- renderPlot({
-            run.and.plot.contiga()
-        })
-    })
-
-    observeEvent(input$contContigaSim,
-    {
-        output$contigaPlot <- renderPlot({
-            run.and.plot.contiga()
-        })
-    })
-
-    run.and.plot.contiga <- function() {
-        isolate({
-            prev.contiga.results <<- 
-                contiga.sim(init.coffee.temp=input$initCoffeeTemp,
-                    room.temp=input$contigaRoomTemp,
-                    sim.length=input$coffeeSimLength,
-                    prev.results=prev.contiga.results)
-            plot.coffee(prev.contiga.results, "slick insulated Contiga mug")
-        })
-    }
 
 
     ############# Interest ##################################################
