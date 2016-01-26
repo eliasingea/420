@@ -6,6 +6,7 @@ source("../sd/caffeine.R")
 source("../sd/coffee.R")
 source("../sd/contiga.R")
 source("../sd/interest.R")
+source("../sd/cpscStudents.R")
 
 shinyServer(function(input,output,session) {
 
@@ -109,4 +110,33 @@ shinyServer(function(input,output,session) {
             plot.period.desc)
     })
 
+
+    ############## CPSC students ###########################################
+
+    observeEvent(input$runCpscSim,
+    {
+        prev.cpsc.results <<- NULL
+        output$cpscPlot <- renderPlot({
+            run.and.plot.cpsc()
+        })
+    })
+
+    observeEvent(input$contCpscSim,
+    {
+        output$cpscPlot <- renderPlot({
+            run.and.plot.cpsc()
+        })
+    })
+
+    run.and.plot.cpsc <- function() {
+        isolate({
+            prev.cpsc.results <<- 
+                cpsc.students.sim(economy=input$economy,
+                    admissions.policy=input$admissions,
+                    CPSC.curric.rigor=input$rigor,
+                    sim.length=input$cpscLength,
+                    prev.results=prev.cpsc.results)
+            plot.cpsc(prev.cpsc.results)
+        })
+    }
 })

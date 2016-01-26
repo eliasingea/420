@@ -7,7 +7,7 @@ shinyUI(fluidPage(
 
     titlePanel("CPSC 420 -- System Dynamics examples"),
 
-    tabsetPanel(selected="Bathtub",
+    tabsetPanel(selected="CPSC",
         tabPanel("Bathtub",
             sidebarLayout(sidebarPanel(
                 numericInput("bathtubSimLength", "Simulation time (min)",
@@ -113,6 +113,32 @@ shinyUI(fluidPage(
             ),
             mainPanel(
                 plotOutput("interestPlot")
+            ))
+        ),
+        tabPanel("CPSC",
+            sidebarLayout(sidebarPanel(
+                numericInput("cpscLength", "Simulation time (years)",
+                    value=20, min=1, step=1, width="40%"),
+                div(class="container-fluid",
+                    div(class="row",
+                        div(class="col-lg-6", 
+                            actionButton("runCpscSim",label="Start/restart")),
+                        div(class="col-lg-6", 
+                            actionButton("contCpscSim",label="Continue"))
+                    )
+                ),
+                div(
+                    h4("Sim parameters"),
+                    sliderInput("economy", "Economy GDP ($ trillions)",
+                        min=1, max=30, step=1, value=16),
+                    sliderInput("rigor", "CPSC curriculum rigor",
+                        min=0, max=1, step=.05, value=.5),
+                    sliderInput("admissions", "Admissions policy",
+                        min=0, max=1, step=.05, value=.5)
+                )
+            ),
+            mainPanel(
+                plotOutput("cpscPlot")
             ))
         )
     )
