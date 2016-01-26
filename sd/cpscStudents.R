@@ -141,8 +141,10 @@ cpsc.students.sim <- function(init.freshmen=1e3, economy=16,
         CPSC.minors[step] <- round(CPSC.minors[step])
     }
 
-    return(data.frame(time,freshmen,undeclared,declared.other,CPSC.majors,
+    return(rbind(prev.results,
+        data.frame(time,freshmen,undeclared,declared.other,CPSC.majors,
         CPSC.minors))
+    )
 }
 
 
