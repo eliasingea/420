@@ -64,7 +64,7 @@ cpsc.students.sim <- function(init.freshmen=1e3, economy=16,
     declare.other.rate <- .05            # 1/yr
     baseline.career.driven.convert.rate <- .05     # (st/yr)/(trill$)
     graduation.rate <- .25               # 1/yr. Assume same for all majors.
-    baseline.scaleback.rate <- .10       # 1/yr
+    baseline.scaleback.rate <- .20       # 1/yr
 
     # The "location" in the logistic function that maps to .5; i.e., the
     # number of CPSC majors that would call for half of undeclared students to
@@ -94,8 +94,8 @@ cpsc.students.sim <- function(init.freshmen=1e3, economy=16,
                 baseline.career.driven.convert.rate * freshmen[step-1] *
                 (20 - economy) 
         }
-        scaleback.prime <- baseline.scaleback.rate * (1 - CPSC.curric.rigor) *
-            CPSC.minors[step-1]
+        scaleback.prime <- baseline.scaleback.rate * CPSC.curric.rigor *
+            CPSC.majors[step-1]
         declared.other.graduate.prime <- graduation.rate * 
             declared.other[step-1]
         CPSC.majors.graduate.prime <- graduation.rate * 
