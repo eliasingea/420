@@ -23,6 +23,12 @@ cpsc.students.sim <- function(init.freshmen=1e3, economy=16,
     prev.results=NULL) {
 
     delta.t <- 1    # year
+
+    # (Setting this before other variables, since it should in fact be based
+    # explicitly on init.freshmen, rather than "the number of freshmen in last
+    # year's results.")
+    baseline.matriculation.pop <- init.freshmen    # st/yr
+
     if (is.null(prev.results)) {
         init.time <- 2016
         init.undeclared <- 0
@@ -52,7 +58,6 @@ cpsc.students.sim <- function(init.freshmen=1e3, economy=16,
     CPSC.minors <- vector(length=length(time))            # st
     CPSC.minors[1] <- init.CPSC.minors
 
-    baseline.matriculation.pop <- init.freshmen    # st/yr
     freshman.dropout.rate <- .18         # 1/yr
     undeclared.dropout.rate <- .15       # 1/yr
     declared.other.dropout.rate <- .05   # 1/yr
@@ -101,7 +106,7 @@ cpsc.students.sim <- function(init.freshmen=1e3, economy=16,
 
         # Since freshmen always move on, we make everyone advance who doesn't
         # do something else.
-        advance.prime <- freshman.matriculation.prime +
+        advance.prime <- freshmen[step-1]/delta.t +
             -freshman.dropout.prime +
             -career.driven.convert.prime
 
