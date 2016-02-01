@@ -63,8 +63,5 @@ plot.reinvestment <- function(sim.results) {
         labels=paste0("Avg profit/yr: $",
             round(total.profit/max(sim.results$time))),
         col="darkgreen", adj=c(1,NA))
-#    text(par("usr")[2]-.5,0,
-#        labels=paste0("Total profit: $",round(total.profit)),
-#        col="darkgreen", adj=c(1,NA))
     legend("topleft",legend=c("capital","profit"),fill=c("brown","green"))
 }
