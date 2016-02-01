@@ -161,7 +161,7 @@ plot.cpsc <- function(sim.results) {
     p <- ggplot(tidy.results, aes(x=time, y=num, col=student.type)) + 
         geom_line(size=1) + 
         xlab("year") + ylab("# students") + labs(color="Student type") +
-        scale_color_discrete(limits=c("freshmen",
+        scale_color_manual(limits=c("freshmen",
                                       "undeclared",
                                       "declared.other",
                                       "CPSC.majors",
@@ -170,6 +170,7 @@ plot.cpsc <- function(sim.results) {
                                       "Undeclared",
                                       "Other major",
                                       "CPSC majors",
-                                      "CPSC minors"))
+                                      "CPSC minors"),
+                            values=c("green","gray","orange","red","pink"))
     print(p)
 }
