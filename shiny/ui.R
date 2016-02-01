@@ -7,7 +7,7 @@ shinyUI(fluidPage(
 
     titlePanel("CPSC 420 -- System Dynamics examples"),
 
-    tabsetPanel(selected="CPSC",
+    tabsetPanel(selected="Bathtub",
         tabPanel("Bathtub",
             sidebarLayout(sidebarPanel(
                 numericInput("bathtubSimLength", "Simulation time (min)",
@@ -113,6 +113,36 @@ shinyUI(fluidPage(
             ),
             mainPanel(
                 plotOutput("interestPlot")
+            ))
+        ),
+        tabPanel("Reinvestment",
+            sidebarLayout(sidebarPanel(
+                numericInput("reinvestmentSimLength", "Simulation time (yrs)",
+                    value=10, min=0, step=1, width="40%"),
+                div(class="container-fluid",
+                    div(class="row",
+                        div(class="col-lg-6", 
+                            actionButton("runReinvestmentSim",
+                                label="Start/restart")),
+                        div(class="col-lg-6", 
+                            actionButton("contReinvestmentSim",
+                                label="Continue"))
+                    )
+                ),
+                div(
+                    h4("Initial conditions"),
+                    sliderInput("initialCapital", "Initial capital ($)",
+                        min=1e3, max=1e5, step=1e3, value=1e4)
+                ),
+                div(
+                    h4("Sim parameters"),
+                    sliderInput("fracOutputInvested",
+                        "Fraction of output reinvested",
+                        min=0, max=1, step=.025, value=.2)
+                )
+            ),
+            mainPanel(
+                plotOutput("reinvestmentPlot")
             ))
         ),
         tabPanel("CPSC",

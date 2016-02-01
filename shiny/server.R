@@ -7,6 +7,7 @@ source("../sd/coffee.R")
 source("../sd/contiga.R")
 source("../sd/interest.R")
 source("../sd/cpscStudents.R")
+source("../sd/reinvestment.R")
 
 shinyServer(function(input,output,session) {
 
@@ -111,7 +112,36 @@ shinyServer(function(input,output,session) {
     })
 
 
-    ############## CPSC students ###########################################
+    ############# Reinvestment ##############################################
+
+    observeEvent(input$runReinvestmentSim,
+    {
+        prev.reinvestment.results <<- NULL
+        output$reinvestmentPlot <- renderPlot({
+            run.and.plot.reinvestment()
+        })
+    })
+
+    observeEvent(input$contReinvestmentSim,
+    {
+        output$reinvestmentPlot <- renderPlot({
+            run.and.plot.reinvestment()
+        })
+    })
+
+    run.and.plot.reinvestment <- function() {
+        isolate({
+            prev.reinvestment.results <<- 
+                reinvestment.sim(init.capital=input$initialCapital,
+                    fraction.of.output.invested=input$fracOutputInvested,
+                    sim.length=input$reinvestmentSimLength,
+                    prev.results=prev.reinvestment.results)
+            plot.reinvestment(prev.reinvestment.results)
+        })
+    }
+
+
+    ############## CPSC students ############################################
 
     observeEvent(input$runCpscSim,
     {
