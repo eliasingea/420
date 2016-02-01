@@ -5,7 +5,7 @@
 # containing its balance over time.
 #
 # init.balance ($)
-# annual.interest.rate (%/year)
+# annual.interest.rate (frac/year)
 # amortize.period (months)
 # sim.length (months)
 #
