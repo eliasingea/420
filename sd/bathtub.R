@@ -62,5 +62,6 @@ plot.bathtub.water.level <- function(sim.results) {
          sim.results$params$turn.off.faucet.time,par("usr")[4],
          col="lightblue", border=NA)
     lines(results$time, results$water.level, lwd=2, col="blue")
+    abline(h=seq(0,max.y,10),col="darkgrey",lty="dashed")
     abline(v=sim.results$params$pull.plug.time,lty="dashed",col="red")
 }

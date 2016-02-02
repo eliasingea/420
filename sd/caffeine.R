@@ -88,5 +88,6 @@ plot.energy <- function(sim.results) {
         ylab="kcal", type="l", col="red", main="Energy",
         ylim=c(min(all.energies), max(all.energies)))
     lines(sim.results$time, sim.results$stored.energy, col="black", lwd=2)
+    abline(h=seq(0,max(all.energies),20000),col="grey",lty="dashed")
     legend("topright",fill=c("red","black"),legend=c("available","stored"))
 }

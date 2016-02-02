@@ -52,5 +52,7 @@ plot.coffee <- function(sim.results, mug.desc="sucky 7-11 mug") {
         main=paste("Temperature of coffee in",mug.desc),
         ylim=c(0,220))
     lines(sim.results$time, sim.results$room.temp, col="black", lwd=2)
+    abline(h=seq(0,220,10),col="grey",lty="dashed")
+    abline(v=seq(0,max(sim.results$time),5),col="grey",lty="dashed")
     legend("topright",fill=c("brown","black"),legend=c("coffee","room"))
 }
