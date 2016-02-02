@@ -94,7 +94,7 @@ shinyServer(function(input,output,session) {
         sim.results <- interest.sim(init.balance=input$initBalance,
             annual.interest.rate=input$interestRate,
             amortize.period=input$amortizationPeriod,
-            sim.length=input$caffeineSimLength)
+            sim.length=input$interestSimLength)
 
         amor.per <- as.numeric(input$amortizationPeriod)
         if (isTRUE(all.equal(amor.per, 1/30))) {
