@@ -1,6 +1,6 @@
 
-# Aliens v. Vampires -- version 2.0
-# (logistic growth)
+# Aliens v. Vampires -- version 2.1
+# (logistic growth with human reproduction)
 # CPSC 420 -- spring 2016
 
 
