@@ -16,6 +16,7 @@ ttoi <- function(t) (t-1940)/delta.t + 1
 init.human.pop <- 7e9
 alien.abduction.rate <- 3      # (people/year)/year
 bite.rate <- .1                # (people/year)/vampire
+birth.rate <- .01              # (people/year)/person
 
 A <- vector()
 V <- vector()
@@ -38,7 +39,7 @@ for (i in 2:length(time)) {
     A.prime <- alien.abduction.rate * (time[i] - 1940) * 
         logistic.factor   # people/year
     V.prime <- bite.rate * V[i-1] * logistic.factor       # people/year
-    H.prime <- -(V.prime + A.prime)    # people/year
+    H.prime <- H[i-1] * birth.rate -(V.prime + A.prime)    # people/year
     earth.population.prime <- -A.prime    # people/year
 
     # Compute stocks.
