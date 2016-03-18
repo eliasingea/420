@@ -12,14 +12,14 @@ itot <- function(i) (i - 1)*delta.t
 ttoi <- function(i) (t)/delta.t + 1
 
 #Simulation parameters. 
-spam.percentage = 0.4                               #total/spam
-good.percentage = 1 - spam.percentage                               #total/emails
-init.total = 100                                   #emails
+spam.percentage = 0.5                             #total/spam
+good.percentage = 1 - spam.percentage               #total/emails
+init.total = 100                                    #emails
 init.spam = init.total * spam.percentage            #emails
 init.common.good = init.total * good.percentage     #emails
 init.spammer.profit = 0                             #dollars
-regen.rate = 0.05                                  #(emails/day)/email
-rate.of.use = 0.04                                   #(emails/day)/email
+regen.rate = 0.05                                   #(emails/day)/email
+rate.of.use = 0.04                                  #(emails/day)/email
 
 Total <- vector()
 Good <- vector()
@@ -58,4 +58,4 @@ plot(time, Good, type="l", col="blue", lwd=2,
      ylab="emails")
 lines(time, Spam, col="red", lwd=2)
 #lines(time, Total, col="green", lwd=2)
-legend("topright", legend=c("Emails", "Spam", "Total"), fill=c("blue", "red", "green"))
+legend("topleft", legend=c("Emails", "Spam"), fill=c("blue", "red"))

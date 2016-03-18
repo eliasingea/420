@@ -8,10 +8,12 @@ source("../sd/contiga.R")
 source("../sd/interest.R")
 source("../sd/cpscStudents.R")
 source("../sd/reinvestment.R")
+source("../sd/commonGoodShiny-elias.R")
 
 shinyServer(function(input,output,session) {
 
-    ############# Bathtub ###################################################
+  
+  ############# Bathtub ###################################################
 
     output$bathtubWaterLevelPlot <- renderPlot({
         if (is.null(input$faucetOnOff)) {
@@ -169,4 +171,16 @@ shinyServer(function(input,output,session) {
             plot.cpsc(prev.cpsc.results)
         })
     }
+    
+    ############ Common Good Email - ELias Ingea ##########################################
+    
+    output$commonGoodPlot <- renderPlot({
+      sim.results <- common.sim(
+        spam.percentage=input$spamPercentage, 
+        regen.rate=input$inflowRate, 
+        rate.of.use=input$outflowRate, 
+        sim.length=input$emailsSimLength)
+      plot.common.good(sim.results)
+    })
+    
 })
