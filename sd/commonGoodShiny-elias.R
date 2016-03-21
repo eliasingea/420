@@ -54,7 +54,7 @@ common.sim <- function(spam.percentage=0.4,
                     rate.of.use=rate.of.use, 
                     sim.length=sim.length)))
 }
-all.values <- c(Good, Spam)
+#all.values <- c(Good, Spam)
 plot.common.good <- function(sim.results) {
     results <- sim.results$results
     max.y <- max(80,results$Spam+results$Good)
