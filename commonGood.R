@@ -1,7 +1,6 @@
 #Tragedy of the Commons
 #Email System
 #CPSC 420 -- Spring 2016
-
 #Elias Ingea
 
 #set up time
